@@ -1,0 +1,57 @@
+---
+# Weeks 12-14: install & configure software with Ansible, deploy CareerConnect
+- name: Configure server and deploy CareerConnect
+  hosts: careerconnect
+  become: true
+  vars:
+    app_dir: /opt/careerconnect
+    app_port: 3000
+    image_name: careerconnect
+  tasks:
+    - name: Install required packages
+      ansible.builtin.apt:
+        name: [git, curl, docker.io]
+        state: present
+        update_cache: true
+
+    - name: Ensure Docker is running and enabled
+      ansible.builtin.service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Create application directory
+      ansible.builtin.file:
+        path: "{{ app_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Copy project files
+      ansible.builtin.copy:
+        src: "{{ playbook_dir }}/../"
+        dest: "{{ app_dir }}/"
+        mode: preserve
+
+    - name: Build Docker image
+      ansible.builtin.command: docker build -t {{ image_name }}:latest .
+      args:
+        chdir: "{{ app_dir }}"
+
+    - name: Remove old container if present
+      ansible.builtin.command: docker rm -f careerconnect
+      failed_when: false
+      changed_when: false
+
+    - name: Run CareerConnect container
+      ansible.builtin.command: >
+        docker run -d --name careerconnect --restart unless-stopped
+        -p {{ app_port }}:3000 {{ image_name }}:latest
+
+    - name: Wait for application health endpoint
+      ansible.builtin.uri:
+        url: "http://localhost:{{ app_port }}/api/health"
+        status_code: 200
+      register: health
+      retries: 10
+      delay: 3
+      until: health.status == 200

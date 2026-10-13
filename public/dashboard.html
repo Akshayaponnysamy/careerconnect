@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recruiter dashboard – CareerConnect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <a class="brand" href="/" aria-label="CareerConnect home">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+        <rect width="34" height="34" rx="9" fill="#fff"/>
+        <path d="M8 17h7l3-6 4 12 3-6h3" fill="none" stroke="#2A3BE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>CareerConnect</span>
+    </a>
+
+    <nav aria-label="Main navigation">
+      <p class="group">Recruiter</p>
+      <button class="nav is-active" data-view="overview"><svg viewBox="0 0 20 20"><path d="M3 11h5v6H3zM12 3h5v14h-5zM3 3h5v5H3z"/></svg>Overview</button>
+      <button class="nav" data-view="jobs"><svg viewBox="0 0 20 20"><path d="M3 7h14v9H3zM7 7V4h6v3"/></svg>Jobs</button>
+      <button class="nav" data-view="pipeline"><svg viewBox="0 0 20 20"><path d="M3 4h4v12H3zM8 4h4v8H8zM13 4h4v5h-4z"/></svg>Pipeline board</button>
+      <button class="nav" data-view="post"><svg viewBox="0 0 20 20"><path d="M10 4v12M4 10h12"/></svg>Post a job</button>
+      <p class="group">Candidate</p>
+      <button class="nav" data-view="mine"><svg viewBox="0 0 20 20"><circle cx="10" cy="7" r="3.2"/><path d="M3.5 17c.7-3.2 3.2-4.6 6.5-4.6s5.8 1.400 6.5 4.600"/></svg>My applications</button>
+    </nav>
+
+    <a class="backlink" href="/">Back to public site</a>
+    <p class="side-foot">Demo workspace<br><span id="clock"></span></p>
+  </aside>
+
+  <div class="main">
+    <header class="bar">
+      <h1 id="title">Overview</h1>
+      <div class="bar-tools">
+        <label class="sr" for="globalSearch">Search jobs</label>
+        <input id="globalSearch" type="search" placeholder="Search roles, companies, skills">
+        <button class="btn" id="quickPost">Post a job</button>
+      </div>
+    </header>
+    <main id="view" tabindex="-1"></main>
+  </div>
+</div>
+
+<div id="scrim" hidden></div>
+<aside id="drawer" hidden role="dialog" aria-modal="true" aria-labelledby="drawerTitle"></aside>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+services:
+  careerconnect:
+    build: .
+    image: careerconnect:latest
+    container_name: careerconnect
+    ports:
+      - "3000:3000"
+    restart: unless-stopped

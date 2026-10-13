@@ -1,0 +1,25 @@
+{
+  "name": "careerconnect",
+  "version": "1.0.0",
+  "description": "CareerConnect - Online Job Recruitment Platform (DevOps lab project)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "jest --coverage --ci",
+    "test:watch": "jest --watch"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0",
+    "jest-junit": "^16.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": ["src/**/*.js", "!src/server.js"],
+    "reporters": ["default", ["jest-junit", {"outputDirectory": "reports", "outputName": "junit.xml"}]]
+  }
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CareerConnect – Find jobs and track every application</title>
+  <meta name="description" content="CareerConnect connects job seekers with hiring teams and shows every step from applied to offer.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+
+<header class="hero">
+  <svg class="net" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g stroke="#fff" stroke-opacity=".10" stroke-width="1.2" fill="none">
+      <path d="M80 120L260 220L430 150L610 260L790 170L980 280L1140 190"/>
+      <path d="M260 220L300 400L470 470L610 260"/>
+      <path d="M790 170L850 380L1010 450L980 280"/>
+      <path d="M300 400L120 520L250 640"/>
+      <path d="M470 470L560 620L760 560L850 380"/>
+      <path d="M1010 450L1130 580"/>
+    </g>
+    <g fill="#fff" fill-opacity=".22">
+      <circle cx="80" cy="120" r="5"/><circle cx="260" cy="220" r="7"/><circle cx="430" cy="150" r="5"/>
+      <circle cx="610" cy="260" r="8"/><circle cx="790" cy="170" r="6"/><circle cx="980" cy="280" r="7"/>
+      <circle cx="1140" cy="190" r="5"/><circle cx="300" cy="400" r="6"/><circle cx="470" cy="470" r="7"/>
+      <circle cx="850" cy="380" r="8"/><circle cx="1010" cy="450" r="6"/><circle cx="120" cy="520" r="5"/>
+      <circle cx="560" cy="620" r="6"/><circle cx="760" cy="560" r="5"/><circle cx="1130" cy="580" r="5"/>
+    </g>
+  </svg>
+
+  <nav class="top" aria-label="Main">
+    <a class="logo" href="/" aria-label="CareerConnect home">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="#fff"/><path d="M8 17h7l3-6 4 12 3-6h3" fill="none" stroke="#2A3BE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      CareerConnect
+    </a>
+    <div class="links">
+      <a href="#jobs">Find jobs</a>
+      <a href="#how">How it works</a>
+      <a href="#employers">For employers</a>
+      <a class="pill-link" href="/dashboard">Recruiter dashboard</a>
+    </div>
+  </nav>
+
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <h1>Know exactly where your application stands.</h1>
+      <p class="sub">CareerConnect connects job seekers with hiring teams across South India, and shows every step from applied to offer.</p>
+
+      <form class="searchbox" id="heroSearch" role="search">
+        <label class="field"><span>What</span><input id="hq" type="search" placeholder="Title, skill or company" autocomplete="off"></label>
+        <label class="field"><span>Where</span><select id="hloc"><option value="">Anywhere</option></select></label>
+        <label class="field"><span>Type</span>
+          <select id="htype"><option value="">Any type</option><option>Full-time</option><option>Part-time</option><option>Internship</option><option>Contract</option></select>
+        </label>
+        <button class="go" type="submit">Search jobs</button>
+      </form>
+
+      <p class="popular">Popular searches:
+        <button type="button" data-q="Docker">Docker</button>
+        <button type="button" data-q="Java">Java</button>
+        <button type="button" data-q="Ansible">Ansible</button>
+        <button type="button" data-q="Intern">Internships</button>
+      </p>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="tracker">
+        <div class="tr-head">
+          <div class="av" style="background:#2A3BE0">C</div>
+          <div><strong>Junior DevOps Engineer</strong><span>CloudNest Technologies · Coimbatore</span></div>
+        </div>
+        <ol class="tr-steps">
+          <li class="done"><i></i>Applied<small>Mon</small></li>
+          <li class="done"><i></i>Screening<small>Wed</small></li>
+          <li class="now"><i></i>Interview<small>Fri, 11:00</small></li>
+          <li><i></i>Offer<small>Pending</small></li>
+        </ol>
+        <div class="tr-foot">Your interview is confirmed. Prepare Git and Docker basics.</div>
+      </div>
+      <div class="chip-float c1"><b id="heroOpen">5</b> new roles match your skills</div>
+      <div class="chip-float c2">Application viewed by the hiring team</div>
+    </div>
+  </div>
+
+  <dl class="numbers" id="numbers" aria-live="polite"></dl>
+</header>
+
+<main>
+  <!-- JOBS -->
+  <section class="sec" id="jobs" aria-labelledby="jobsH">
+    <div class="sec-head">
+      <div><h2 id="jobsH">Open roles</h2><p class="muted" id="jobCount">Loading roles…</p></div>
+      <div class="filter" role="group" aria-label="Filter by job type" id="typeChips"></div>
+    </div>
+    <div class="jobgrid" id="jobGrid"></div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="sec tint" aria-labelledby="skillsH">
+    <div class="sec-head"><div><h2 id="skillsH">Browse by skill</h2><p class="muted">Pick a skill to see the roles that need it.</p></div></div>
+    <div class="skillcloud" id="skillCloud"></div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="sec" id="how" aria-labelledby="howH">
+    <div class="sec-head"><div><h2 id="howH">How CareerConnect works</h2><p class="muted">Three steps from search to offer.</p></div></div>
+    <ol class="steps3">
+      <li><span class="n">1</span><h3>Find a role that fits</h3><p>Search by title, skill, location or job type. Every listing shows pay, requirements and how many people have applied.</p></li>
+      <li><span class="n">2</span><h3>Apply in under a minute</h3><p>Send your name, email and a short note. There is no account to create and no long forms to fill.</p></li>
+      <li><span class="n">3</span><h3>Follow your progress</h3><p>Enter your email on the tracker to see whether you are in screening, interview or offer, updated by the hiring team.</p></li>
+    </ol>
+    <div class="trackform">
+      <form id="trackForm" novalidate>
+        <label class="sr" for="trackEmail">Your email</label>
+        <input id="trackEmail" type="email" placeholder="Already applied? Enter your email to see your status">
+        <button class="btn" type="submit">Check status</button>
+      </form>
+      <div id="trackOut" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- EMPLOYERS -->
+  <section class="sec employers" id="employers" aria-labelledby="empH">
+    <div class="emp-grid">
+      <div>
+        <h2 id="empH">Hiring? See your whole pipeline in one view.</h2>
+        <p class="lead">Post a role in a minute, watch applications arrive, and move candidates from screening to offer on a board your team can scan at a glance.</p>
+        <ul class="ticks">
+          <li>Live pipeline with counts for every stage</li>
+          <li>Pipeline board to move candidates forward or reject them</li>
+          <li>Post a job with a live preview of the listing</li>
+        </ul>
+        <a class="btn light" href="/dashboard">Open recruiter dashboard</a>
+      </div>
+      <div class="emp-visual" aria-label="Live hiring pipeline">
+        <p class="muted-light">Your pipeline right now</p>
+        <div class="band" id="band"></div>
+        <div class="band-legend" id="bandLegend"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPANIES -->
+  <section class="sec" aria-labelledby="coH">
+    <div class="sec-head"><div><h2 id="coH">Companies hiring now</h2><p class="muted">Teams with open roles on CareerConnect today.</p></div></div>
+    <ul class="companies" id="companies"></ul>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-grid">
+    <div>
+      <a class="logo dark" href="/">CareerConnect</a>
+      <p>An online job recruitment platform built as a DevOps lab project.</p>
+    </div>
+    <div><h3>Candidates</h3><a href="#jobs">Find jobs</a><a href="#how">How it works</a><a href="#how">Track an application</a></div>
+    <div><h3>Employers</h3><a href="/dashboard">Recruiter dashboard</a><a href="/dashboard">Post a job</a><a href="/dashboard">Pipeline board</a></div>
+    <div><h3>Built with</h3><span>Node.js and Express</span><span>Git and GitHub</span><span>Jenkins CI/CD</span><span>Docker and Ansible</span></div>
+  </div>
+  <p class="copy">CareerConnect · Demo project for the DevOps laboratory</p>
+</footer>
+
+<dialog id="applyDialog" aria-labelledby="dlgTitle"></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="landing.js"></script>
+</body>
+</html>
